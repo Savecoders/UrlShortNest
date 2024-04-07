@@ -53,4 +53,4 @@ pids
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
 }
 
-postgre
+postgres
