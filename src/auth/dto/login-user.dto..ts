@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import {
   IsEmail,
   IsOptional,
@@ -14,6 +15,7 @@ export class LoginUserDto {
 
   @IsString()
   @MinLength(3)
+  @Transform(({ value }) => value.toLowerCase().trim())
   @IsOptional()
   name: string;
 

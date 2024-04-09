@@ -13,14 +13,16 @@ import { ShortsService } from './shorts.service';
 import { CreateShortDto } from './dto/create-short.dto';
 import { UpdateShortDto } from './dto/update-short.dto';
 import { Response } from 'express';
+import { GetUser } from 'src/auth/decorators/get-user.decorator';
+import { User } from 'src/auth/entities/user.entity';
 
 @Controller('shorts')
 export class ShortsController {
   constructor(private readonly shortsService: ShortsService) {}
 
   @Post()
-  create(@Body() createShortDto: CreateShortDto) {
-    return this.shortsService.create(createShortDto);
+  create(@Body() createShortDto: CreateShortDto, @GetUser() user: User) {
+    return this.shortsService.create(createShortDto, user);
   }
 
   @Get()

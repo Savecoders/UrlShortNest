@@ -30,7 +30,7 @@ export class CreateUserDto {
   )
   password: string;
 
-  @Transform(({ value }) => value.toLowerCase())
+  @Transform(({ value }) => value.toLowerCase().trim())
   @IsString()
   @MinLength(3)
   name: string;
