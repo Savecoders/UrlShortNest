@@ -12,8 +12,6 @@ import { AuthModule } from './auth/auth.module';
     ConfigModule.forRoot({
       load: [EnvConfiguration],
     }),
-    ShortsModule,
-    AuthModule,
     TypeOrmModule.forRoot({
       ssl: process.env.STAGE === 'prod',
       type: 'postgres',
@@ -28,6 +26,8 @@ import { AuthModule } from './auth/auth.module';
       // in production, synchronize should be set to false
       synchronize: true,
     }),
+    ShortsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

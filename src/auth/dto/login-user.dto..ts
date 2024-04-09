@@ -15,7 +15,7 @@ export class LoginUserDto {
   @IsString()
   @MinLength(3)
   @IsOptional()
-  username: string;
+  name: string;
 
   @IsStrongPassword(
     {
