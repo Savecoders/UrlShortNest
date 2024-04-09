@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { EnvConfiguration } from './config/app.config';
 import { ShortsModule } from './shorts/shorts.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       load: [EnvConfiguration],
     }),
     ShortsModule,
+    AuthModule,
     TypeOrmModule.forRoot({
       ssl: process.env.STAGE === 'prod',
       type: 'postgres',

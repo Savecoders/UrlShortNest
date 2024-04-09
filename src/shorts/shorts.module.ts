@@ -8,5 +8,6 @@ import { Short } from './entities/short.entity';
   controllers: [ShortsController],
   providers: [ShortsService],
   imports: [TypeOrmModule.forFeature([Short])],
+  exports: [ShortsService],
 })
 export class ShortsModule {}
