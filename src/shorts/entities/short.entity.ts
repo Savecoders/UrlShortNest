@@ -4,9 +4,13 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+<<<<<<< HEAD
   ManyToMany,
   ManyToOne,
   OneToMany,
+=======
+  ManyToOne,
+>>>>>>> b86046a (Refactor user and short entity relationships)
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
