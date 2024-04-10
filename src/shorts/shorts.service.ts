@@ -10,18 +10,26 @@ import { UpdateShortDto } from './dto/update-short.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Short } from './entities/short.entity';
 import { Repository } from 'typeorm';
+import { User } from 'src/auth/entities/user.entity';
 
 @Injectable()
 export class ShortsService {
   private readonly logger = new Logger('ProductsService');
   constructor(
     @InjectRepository(Short)
-    private shortRepository: Repository<Short>,
+    private readonly shortRepository: Repository<Short>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
 
-  async create(createShortDto: CreateShortDto) {
+  async create(createShortDto: CreateShortDto, user: User) {
     try {
       const short = this.shortRepository.create(createShortDto);
+
+      if (user) {
+        console.log('user', user);
+      }
+
       await this.shortRepository.save(short);
 
       delete short.id;

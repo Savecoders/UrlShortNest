@@ -1,8 +1,12 @@
+import { User } from 'src/auth/entities/user.entity';
 import {
   BeforeInsert,
   BeforeUpdate,
   Column,
   Entity,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -38,6 +42,13 @@ export class Short {
     default: 0,
   })
   clicks: number;
+
+  // Null if the short is public
+  @ManyToOne(() => User, (user) => user.shorts, {
+    eager: true,
+    nullable: true,
+  })
+  user: User | null;
 
   @BeforeInsert()
   generateShort() {
