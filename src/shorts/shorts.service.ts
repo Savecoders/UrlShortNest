@@ -26,13 +26,26 @@ export class ShortsService {
     try {
       const short = this.shortRepository.create(createShortDto);
 
-      if (!user) {
-        console.log('not get user');
-      }
-
       if (user && user.id) {
         short.user = user;
       }
+
+      await this.shortRepository.save(short);
+
+      delete short.id;
+      delete short.user;
+
+      return short;
+    } catch (error) {
+      this.handleDBExceptions(error);
+    }
+  }
+
+  //Note: This method is not protected by the UserGuard
+  // remove this method in the future
+  async createNotAuth(createShortDto: CreateShortDto) {
+    try {
+      const short = this.shortRepository.create(createShortDto);
 
       await this.shortRepository.save(short);
 

@@ -28,6 +28,11 @@ export class ShortsController {
     return this.shortsService.create(createShortDto, user);
   }
 
+  @Post('public')
+  createPublic(@Body() createShortDto: CreateShortDto) {
+    return this.shortsService.createNotAuth(createShortDto);
+  }
+
   @Get()
   findAll() {
     return this.shortsService.findAll();
