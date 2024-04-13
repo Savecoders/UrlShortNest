@@ -42,7 +42,7 @@ export class Short {
   clicks: number;
 
   // Null if the short is public
-  @ManyToOne(() => User, (user) => user.shorts, {
+  @ManyToOne(() => User, (user) => user.short, {
     eager: true,
     nullable: true,
   })

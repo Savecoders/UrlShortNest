@@ -8,19 +8,22 @@ import {
   Delete,
   Res,
   ParseUUIDPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { ShortsService } from './shorts.service';
 import { CreateShortDto } from './dto/create-short.dto';
 import { UpdateShortDto } from './dto/update-short.dto';
 import { Response } from 'express';
-import { GetUser } from 'src/auth/decorators/get-user.decorator';
 import { User } from 'src/auth/entities/user.entity';
+import { GetUser } from 'src/auth/decorators/get-user.decorator';
+import { UserGuard } from 'src/auth/guards/user.guard';
 
 @Controller('shorts')
 export class ShortsController {
   constructor(private readonly shortsService: ShortsService) {}
 
   @Post()
+  @UseGuards(UserGuard)
   create(@Body() createShortDto: CreateShortDto, @GetUser() user: User) {
     return this.shortsService.create(createShortDto, user);
   }

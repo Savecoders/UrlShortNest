@@ -26,13 +26,18 @@ export class ShortsService {
     try {
       const short = this.shortRepository.create(createShortDto);
 
-      if (user) {
-        console.log('user', user);
+      if (!user) {
+        console.log('not get user');
+      }
+
+      if (user && user.id) {
+        short.user = user;
       }
 
       await this.shortRepository.save(short);
 
       delete short.id;
+      delete short.user;
 
       return short;
     } catch (error) {

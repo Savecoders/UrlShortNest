@@ -34,7 +34,7 @@ export class User {
 
   // One user can have many shorts
   @OneToMany(() => Short, (short) => short.user)
-  shorts: Short;
+  short: Short;
 
   @BeforeInsert()
   checkFieldsInsert() {
