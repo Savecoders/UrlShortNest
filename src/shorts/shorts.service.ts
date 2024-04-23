@@ -62,6 +62,24 @@ export class ShortsService {
     return `This action returns all shorts`;
   }
 
+  findMyShorts(user: User): Promise<Short[]> {
+    const shorts = this.shortRepository.find({
+      where: {
+        user: user,
+      },
+      select: [
+        'name',
+        'short',
+        'url_redirect',
+        'clicks',
+        'date_created',
+        'date_updated',
+      ],
+    });
+
+    return shorts;
+  }
+
   async findOne(id: string): Promise<{ urlRedirect: string }> {
     const short = await this.shortRepository.findOne({
       where: {

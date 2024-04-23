@@ -38,7 +38,14 @@ export class ShortsController {
     return this.shortsService.findAll();
   }
 
+  @Get('my')
+  @UseGuards(UserGuard)
+  findMyShorts(@GetUser() user: User) {
+    return this.shortsService.findMyShorts(user);
+  }
+
   @Get(':short')
+  @UseGuards(UserGuard)
   async findOne(@Param('short') short: string, @Res() res: Response) {
     const { urlRedirect } = await this.shortsService.findOne(short);
     res.redirect(urlRedirect);
