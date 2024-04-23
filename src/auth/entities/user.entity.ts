@@ -33,7 +33,9 @@ export class User {
   isActive: boolean;
 
   // One user can have many shorts
-  @OneToMany(() => Short, (short) => short.user)
+  @OneToMany(() => Short, (short) => short.user, {
+    onDelete: 'CASCADE',
+  })
   short: Short;
 
   @BeforeInsert()

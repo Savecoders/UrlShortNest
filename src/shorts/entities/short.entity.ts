@@ -43,7 +43,7 @@ export class Short {
 
   // Null if the short is public
   @ManyToOne(() => User, (user) => user.short, {
-    eager: true,
+    eager: false,
     nullable: true,
   })
   user: User | null;
