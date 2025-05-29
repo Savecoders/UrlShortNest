@@ -56,8 +56,17 @@ export class AuthService {
     return `This action returns a #${id} auth`;
   }
 
-  update(id: number, updateAuthDto: UpdateUserDto) {
-    return `This action updates a #${id} auth`;
+  async update(id: number, updateAuthDto: UpdateUserDto) {
+    const { password, ...res } = updateAuthDto;
+
+    if (password) {
+      const salts = bcrypt.genSaltSync(10);
+      const hashed = bcrypt.hashSync(password, salts);
+
+      await this.authRepository.update(id, { ...res, password: hashed });
+    }
+
+    return this.authRepository.update(id, res);
   }
 
   remove(id: number) {

@@ -4,6 +4,7 @@ import {
   IsOptional,
   IsString,
   IsStrongPassword,
+  IsUrl,
   MinLength,
 } from 'class-validator';
 
@@ -18,6 +19,11 @@ export class LoginUserDto {
   @Transform(({ value }) => value.toLowerCase().trim())
   @IsOptional()
   name: string;
+
+  @IsString()
+  @IsUrl({}, { each: true })
+  @IsOptional()
+  imageUrl?: string;
 
   @IsStrongPassword(
     {
